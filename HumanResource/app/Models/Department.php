@@ -2,26 +2,29 @@
 
 namespace App\Models;
 
+use App\Http\Controllers\HistoryController;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
 class Department extends Model
 {
     use HasFactory;
-
-    // Định nghĩa bảng và khóa chính
-    protected $table = 'departments';
+    
     protected $primaryKey = 'DepartmentID';
-
-    // Định nghĩa các thuộc tính có thể được gán
+    
     protected $fillable = [
         'Name',
         'GroupName',
     ];
 
-    // Quan hệ 1-n với bảng EmployeeDepartmentHistory
-    public function departmentHistories()
+    public function employeeDepartmentHistories()
     {
-        return $this->hasMany(EmployeeDepartmentHistory::class, 'DepartmentID');
+        return $this->hasMany(HistoryController::class, 'department_id');
+    }
+
+    public function employees()
+    {
+        return $this->belongsToMany(Employee::class, 'department_employee', 'department_id', 'employee_id');
     }
 }
+

@@ -12,9 +12,10 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('departments', function (Blueprint $table) {
-            $table->smallIncrements('DepartmentID');
+            $table->smallInteger('DepartmentID')->primary(); // Khóa chính
             $table->longText('Name');
             $table->longText('GroupName');
+            $table->timestamp('ModifiedDate')->nullable(); // Sử dụng timestamp cho ModifiedDate
             $table->timestamps();
         });
     }

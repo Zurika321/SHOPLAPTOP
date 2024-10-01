@@ -8,21 +8,37 @@ use Illuminate\Database\Eloquent\Model;
 class Employee extends Model
 {
     use HasFactory;
-    // Định nghĩa bảng và khóa chính
-    protected $table = 'employees';
-    protected $primaryKey = 'BusinessEntityID';
+    protected $table = 'employees'; // Đảm bảo rằng bạn sử dụng đúng tên bảng
+    protected $primaryKey = 'BusinessEntityID'; // Đặt khóa chính nếu nó khác với 'id'
+    public $timestamps = false; // Tắt tính năng timestamps
 
-    // Định nghĩa các thuộc tính có thể được gán
     protected $fillable = [
-        'FirstName',
-        'LastName',
+        'NationalIDNumber',
+        'LoginID',
         'JobTitle',
-        // Thêm các thuộc tính khác nếu cần
+        'BirthDate',
+        'MaritalStatus',
+        'Gender',
+        'HireDate',
+        'OrganizationNode',
+        'OrganizationLevel',
+        'VacationHours',
+        'SickLeaveHours',
     ];
 
-    // Quan hệ 1-n với bảng EmployeeDepartmentHistory
-    public function departmentHistories()
+    public function employeeDepartmentHistories()
     {
-        return $this->hasMany(EmployeeDepartmentHistory::class, 'BusinessEntityID');
+        return $this->hasMany(History::class, 'employee_id'); // Quan hệ 1-nhiều với EmployeeDepartmentHistory
     }
+
+    public function getId()
+    {
+        return $this->attributes['BusinessEntityID'];
+    }
+    public function departments()
+    {
+        return $this->belongsToMany(Department::class, 'department_employee', 'employee_id', 'department_id');
+    }
+
+
 }
