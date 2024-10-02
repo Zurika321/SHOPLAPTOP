@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Department;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Http\Request;
-use PHPUnit\Framework\Attributes\Depends;
 
 class AdminDepartmentController extends Controller
 {

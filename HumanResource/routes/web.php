@@ -2,8 +2,7 @@
 
 use App\Http\Controllers\admin\AdminDepartmentController;
 use App\Http\Controllers\admin\AdminEmployeeController;
-use App\Http\Controllers\AdminHistoryController;
-use App\Http\Controllers\AdminShiftController;
+use App\Http\Controllers\admin\AdminShiftController;
 use App\Http\Controllers\EmployeeController;
 use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\HistoryController;
@@ -50,24 +49,24 @@ Route::resource('admin/departments', AdminDepartmentController::class)
         'destroy' => 'admin.departments.destroy'
     ]);
 
-    Route::resource('admin/history', AdminHistoryController::class)
-    ->names([
-        'index' => 'admin.history.index',
-        // 'create' => 'admin.history.create',
-        // 'store' => 'admin.history.store',
-        // 'show' => 'admin.history.show',
-        // 'edit' => 'admin.history.edit',
-        // 'update' => 'admin.history.update',
-        // 'destroy' => 'admin.history.destroy'
-    ]);
-
     Route::resource('admin/shift', AdminShiftController::class)
     ->names([
-        // 'index' => 'admin.shift.index',
-        // 'create' => 'admin.shift.create',
-        // 'store' => 'admin.shift.store',
-        // 'show' => 'admin.shift.show',
-        // 'edit' => 'admin.shift.edit',
-        // 'update' => 'admin.shift.update',
-        // 'destroy' => 'admin.shift.destroy'
+        'index' => 'admin.shift.index',
+        'create' => 'admin.shift.create',
+        'store' => 'admin.shift.store',
+        'show' => 'admin.shift.show',
+        'edit' => 'admin.shift.edit',
+        'update' => 'admin.shift.update',
+        'destroy' => 'admin.shift.destroy'
     ]);
+
+    // Route::resource('admin/report', AdminShiftController::class)
+    // ->names([
+    //     'index' => 'admin.shift.index',
+    //     'create' => 'admin.shift.create',
+    //     'store' => 'admin.shift.store',
+    //     'show' => 'admin.shift.show',
+    //     'edit' => 'admin.shift.edit',
+    //     'update' => 'admin.shift.update',
+    //     'destroy' => 'admin.shift.destroy'
+    // ]);

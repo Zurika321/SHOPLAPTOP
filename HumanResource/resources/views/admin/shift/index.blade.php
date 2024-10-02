@@ -4,37 +4,39 @@
 
 @section('content')
 <h2>{{ $viewData['title'] }}</h2>
-<form action="{{ route('admin.departments.index') }}" method="GET" class="mb-3">
+{{-- <form action="{{ route('admin.departments.index') }}" method="GET" class="mb-3">
     <input type="text" name="search" class="form-control" placeholder="Search employees..." value="{{ request()->query('search') }}">
     <button type="submit" class="btn btn-primary mt-2">Search</button>
-</form>
+</form> --}}
 {{-- nút tạo --}}
-<a href="{{ route('admin.departments.create') }}" class="btn btn-primary">Add Department</a>
+{{-- <a href="{{ route('admin.departments.create') }}" class="btn btn-primary">Add Department</a> --}}
 <table class="table">
     <thead>
         <tr>
+            <th>Shft ID</th>
             <th>Name</th>
-            <th>Group Name</th>
-            <th>Modified Date</th>
+            <th>Start Time</th>
+            <th>End Time</th>
             <th>Actions</th>
         </tr>
     </thead>
     <tbody>
-        @foreach ($viewData['departments'] as $department)
+        @foreach ($viewData['shift'] as $shift)
         <tr>
-            <td>{{ $department->Name }}</td>
-            <td>{{ $department->GroupName }}</td>
-            <td>{{ $department->ModifiedDate }}</td>
+            <td>{{ $shift->ShiftId }}</td>
+            <td>{{ $shift->Name }}</td>
+            <td>{{ $shift->StartTime }}</td>
+            <td>{{ $shift->EndTime }}</td>
             <td>
-                 {{-- xem nhân viên --}}
-                 <a href="{{ route('admin.departments.show', ['department' => $department->DepartmentID]) }}" class="btn btn-info">View Employees</a>
+                {{-- xem chi tiết --}}
+                <a href="{{ route('admin.shift.show', ['shift' => $shift->ShiftId]) }}" class="btn btn-info">Details</a>
                 {{-- nút edit --}}
-                <a href="{{ route('admin.departments.edit', ['department' => $department->DepartmentID]) }}" class="btn btn-primary">Edit</a>
+                <a href="{{ route('admin.shift.edit', ['shift' => $shift->ShiftId]) }}" class="btn btn-primary">Edit</a>
                 {{-- nút xóa --}}
-                <form action="{{ route('admin.departments.destroy', ['department' => $department->DepartmentID]) }}" method="POST" style="display:inline;">
+                <form action="{{ route('admin.shift.destroy', ['shift' => $shift->ShiftId]) }}" method="POST" style="display:inline;">
                     @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this department?');">Delete</button>
+                    @method('DELETE') <!-- Xác định phương thức DELETE -->
+                    <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this shift?');">Delete</button>
                 </form>
             </td>
         </tr>
