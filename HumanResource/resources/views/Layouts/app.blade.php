@@ -21,8 +21,9 @@
                 <div class="navbar-nav ms-auto">
                     <a href="{{ route('employee.index') }}" class="nav-link active">Employees</a>
                     <a href="{{ route('department.index') }}" class="nav-link active">Departments</a>
-                    <a href="{{ route('history.index') }}" class="nav-link active">History</a>
                     <a href="{{ route('shift.index') }}" class="nav-link active">Shift</a>
+                    <a href="{{ route('history.index') }}" class="nav-link active">History</a>
+                    <a href="{{ route('admin.index') }}" class="nav-link active">Admin</a>
                 </div>
             </div>
         </div>

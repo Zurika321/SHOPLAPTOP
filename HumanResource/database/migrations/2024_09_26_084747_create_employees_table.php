@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('employees', function (Blueprint $table) {
-            $table->id('BusinessEntityID'); // Tạo trường BusinessEntityID làm khóa chính
+            $table->bigIncrements('BusinessEntityID')->primary(); // Khóa chính
             $table->string('NationalIDNumber', 100);
             $table->text('LoginID');
             $table->longText('OrganizationNode')->nullable();
@@ -22,11 +22,12 @@ return new class extends Migration
             $table->char('MaritalStatus', 1);
             $table->char('Gender', 1);
             $table->date('HireDate');
-            $table->smallInteger('VacationHours');
-            $table->smallInteger('SickLeaveHours');
+            $table->smallInteger('VacationHours')->default(0); // Có thể thêm giá trị mặc định
+            $table->smallInteger('SickLeaveHours')->default(0); // Có thể thêm giá trị mặc định
             $table->timestamp('ModifiedDate')->nullable(); // Sử dụng timestamp cho ModifiedDate
             $table->timestamps(); // Tạo created_at và updated_at
         });
+        
     }
 
     /**

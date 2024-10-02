@@ -10,7 +10,7 @@ class Employee extends Model
     use HasFactory;
     protected $table = 'employees'; // Đảm bảo rằng bạn sử dụng đúng tên bảng
     protected $primaryKey = 'BusinessEntityID'; // Đặt khóa chính nếu nó khác với 'id'
-    public $timestamps = false; // Tắt tính năng timestamps
+    public $timestamps = true; // Tắt tính năng timestamps
 
     protected $fillable = [
         'NationalIDNumber',
@@ -35,10 +35,10 @@ class Employee extends Model
     {
         return $this->attributes['BusinessEntityID'];
     }
+
     public function departments()
     {
-        return $this->belongsToMany(Department::class, 'department_employee', 'employee_id', 'department_id');
+        return $this->belongsToMany(Department::class, 'employee_department_history', 'BusinessEntityID', 'DepartmentID');
     }
-
 
 }

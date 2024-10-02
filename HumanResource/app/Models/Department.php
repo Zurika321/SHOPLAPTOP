@@ -9,8 +9,9 @@ use Illuminate\Database\Eloquent\Model;
 class Department extends Model
 {
     use HasFactory;
-    
+    protected $table = 'departments';
     protected $primaryKey = 'DepartmentID';
+    
     
     protected $fillable = [
         'Name',
@@ -24,7 +25,8 @@ class Department extends Model
 
     public function employees()
     {
-        return $this->belongsToMany(Employee::class, 'department_employee', 'department_id', 'employee_id');
+        return $this->belongsToMany(Employee::class, 'employee_department_history', 'DepartmentID', 'BusinessEntityID');
     }
+    
 }
 

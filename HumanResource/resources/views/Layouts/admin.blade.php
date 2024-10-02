@@ -24,9 +24,9 @@
             class="nav-link text-white">- Admin - Employees</a></li>
         <li><a href="{{ route('admin.departments.index') }}" 
             class="nav-link text-white">- Admin - Departments</a></li>
-        {{-- <li><a href="{{ route('admin.product.index') }}" 
+        <li><a href="{{ route('admin.history.index') }}" 
             class="nav-link text-white">- Admin - History</a></li>
-        <li><a href="{{ route('admin.product.index') }}" 
+        {{-- <li><a href="{{ route('admin.shift.index') }}" 
             class="nav-link text-white">- Admin - Shift</a></li> --}}
     </ul>
 </div>

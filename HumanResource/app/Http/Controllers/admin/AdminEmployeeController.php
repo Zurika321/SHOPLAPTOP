@@ -36,20 +36,21 @@ class AdminEmployeeController extends Controller
     }
 
     public function store(Request $request)
-    {
-        // Validate form inputs
-        $request->validate([
-            "NationalIDNumber" => "required|max:100",
-            "LoginID" => "required|max:255",
-            "JobTitle" => "required|max:50",
-            "BirthDate" => "required|date",
-            "MaritalStatus" => "required|in:M,S",
-            "Gender" => "required|in:M,F",
-            "HireDate" => "required|date",
-        ]);
+{
+    // Validate form inputs
+    $request->validate([
+        "NationalIDNumber" => "required|max:100",
+        "LoginID" => "required|max:255",
+        "JobTitle" => "required|max:50",
+        "BirthDate" => "required|date",
+        "MaritalStatus" => "required|in:M,S",
+        "Gender" => "required|in:M,F",
+        "HireDate" => "required|date",
+    ]);
 
-        // Tạo nhân viên với dữ liệu từ form
-        Employee::create($request->only([
+    // Tạo nhân viên với dữ liệu từ form và thêm giá trị mặc định cho VacationHours
+    Employee::create(array_merge(
+        $request->only([
             "NationalIDNumber", 
             "LoginID", 
             "JobTitle", 
@@ -57,10 +58,15 @@ class AdminEmployeeController extends Controller
             "MaritalStatus", 
             "Gender", 
             "HireDate",
-        ]));
+        ]), [
+            "VacationHours" => 0, // Gán giá trị mặc định là 0 cho VacationHours
+            "SickLeaveHours" => 0, // Gán giá trị mặc định là 0 cho SickLeaveHours (nếu cần)
+        ]
+    ));
 
-        return redirect()->route('admin.employees.index')->with('success', 'Employee added successfully!');
-    }
+    return redirect()->route('admin.employees.index')->with('success', 'Employee added successfully!');
+}
+
 
     public function show($id)
     {

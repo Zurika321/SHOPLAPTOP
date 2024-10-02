@@ -12,23 +12,25 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('employee_department_history', function (Blueprint $table) {
-            $table->unsignedBigInteger('BusinessEntityID');  // Khóa ngoại từ bảng employees
-            $table->smallInteger('DepartmentID');  // Khóa ngoại từ bảng departments
-            $table->tinyInteger('ShiftID');  // Khóa ngoại từ bảng shifts
-            $table->date('StartDate');  // Ngày bắt đầu công việc
-            $table->date('EndDate')->nullable();  // Ngày kết thúc công việc
-            $table->timestamp('ModifiedDate')->useCurrent();  // Ngày cập nhật cuối
-
+            $table->unsignedBigInteger('BusinessEntityID'); // Khóa ngoại từ bảng employees
+            $table->unsignedSmallInteger('DepartmentID'); // Khóa ngoại từ bảng departments
+            $table->unsignedSmallInteger('ShiftID'); // Khóa ngoại từ bảng shifts
+            $table->date('StartDate'); // Ngày bắt đầu công việc
+            $table->date('EndDate')->nullable(); // Ngày kết thúc công việc
+            $table->timestamp('ModifiedDate')->useCurrent();
+        
             // Định nghĩa các khóa ngoại
             $table->foreign('BusinessEntityID')->references('BusinessEntityID')->on('employees')->onDelete('cascade');
             $table->foreign('DepartmentID')->references('DepartmentID')->on('departments')->onDelete('cascade');
             $table->foreign('ShiftID')->references('ShiftID')->on('shifts')->onDelete('cascade');
-
+        
             // Thêm index nếu cần
             $table->index('BusinessEntityID');
             $table->index('DepartmentID');
             $table->index('ShiftID');
+            
         });
+        
     }
 
     /**
